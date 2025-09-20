@@ -1,0 +1,132 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-pc:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        lfs: true
+        
+    - name: Cache Unity Library
+      uses: actions/cache@v3
+      with:
+        path: Library
+        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+        restore-keys: |
+          Library-
+          
+    - name: Cache Unity Packages
+      uses: actions/cache@v3
+      with:
+        path: Packages
+        key: Packages-${{ hashFiles('Packages/**') }}
+        restore-keys: |
+          Packages-
+    
+    - name: Setup Unity
+      uses: game-ci/unity-setup@v2
+      with:
+        unity-version: 2022.3.25f1
+        
+    - name: Build Windows
+      uses: game-ci/unity-builder@v3
+      with:
+        targetPlatform: StandaloneWindows64
+        buildMethod: BuildScript.BuildWindows
+        
+    - name: Upload Windows Build
+      uses: actions/upload-artifact@v3
+      with:
+        name: Windows Build
+        path: build/Windows/
+        
+  build-android:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        lfs: true
+        
+    - name: Cache Unity Library
+      uses: actions/cache@v3
+      with:
+        path: Library
+        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+        restore-keys: |
+          Library-
+          
+    - name: Cache Unity Packages
+      uses: actions/cache@v3
+      with:
+        path: Packages
+        key: Packages-${{ hashFiles('Packages/**') }}
+        restore-keys: |
+          Packages-
+    
+    - name: Setup Unity
+      uses: game-ci/unity-setup@v2
+      with:
+        unity-version: 2022.3.25f1
+        
+    - name: Build Android
+      uses: game-ci/unity-builder@v3
+      with:
+        targetPlatform: Android
+        buildMethod: BuildScript.BuildAndroid
+        
+    - name: Upload Android Build
+      uses: actions/upload-artifact@v3
+      with:
+        name: Android Build
+        path: build/Android/
+        
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        lfs: true
+        
+    - name: Cache Unity Library
+      uses: actions/cache@v3
+      with:
+        path: Library
+        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+        restore-keys: |
+          Library-
+          
+    - name: Cache Unity Packages
+      uses: actions/cache@v3
+      with:
+        path: Packages
+        key: Packages-${{ hashFiles('Packages/**') }}
+        restore-keys: |
+          Packages-
+    
+    - name: Setup Unity
+      uses: game-ci/unity-setup@v2
+      with:
+        unity-version: 2022.3.25f1
+        
+    - name: Run Tests
+      uses: game-ci/unity-test-runner@v3
+      with:
+        unity-version: 2022.3.25f1
+        testMode: all
+        
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: Test Results
+        path: artifacts/
