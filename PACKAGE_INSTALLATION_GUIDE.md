@@ -18,48 +18,51 @@ This guide will help you install all the required packages for Chonker Races.
 
 ### **Step 2: Install Input System**
 
-#### **Method A: From Package Manager**
-1. **In Package Manager**, look for **"Input System"** in the list
-2. **Click** on it
-3. **Click** "Install" button
-4. **If prompted** about enabling the new Input System:
+#### **Method A: From Git URL (Recommended)**
+1. **Click** the **"+"** button in Package Manager (top left)
+2. **Select** "Add package from git URL"
+3. **Type**: `com.unity.inputsystem`
+4. **Click** "Add"
+5. **If prompted** about enabling the new Input System:
    - Click **"Yes"**
    - Unity will restart (this is normal)
 
-#### **Method B: Add by Name**
-1. **Click** the **"+"** button in Package Manager (top left)
-2. **Select** "Add package by name"
-3. **Type**: `com.unity.inputsystem`
-4. **Click** "Add"
+#### **Method B: From Package Manager**
+1. **In Package Manager**, look for **"Input System"** in the list
+2. **Click** on it
+3. **Click** "Install" button
 
 ### **Step 3: Install TextMeshPro**
 
-1. **In Package Manager**, look for **"TextMeshPro"** in the list
-2. **Click** on it
-3. **Click** "Install" button
-4. **If prompted** to import TMP Essentials:
+#### **Method A: From Git URL (Recommended)**
+1. **Click** the **"+"** button in Package Manager (top left)
+2. **Select** "Add package from git URL"
+3. **Type**: `com.unity.textmeshpro`
+4. **Click** "Add"
+5. **If prompted** to import TMP Essentials:
    - Click **"Import TMP Essentials"**
    - This adds default fonts and materials
 
+#### **Method B: From Package Manager**
+1. **In Package Manager**, look for **"TextMeshPro"** in the list
+2. **Click** on it
+3. **Click** "Install" button
+
 ### **Step 4: Install Mirror Networking**
 
-This package is not in the official Unity Package Manager, so we need to download it manually:
+#### **Method A: From Git URL (Recommended)**
+1. **Click** the **"+"** button in Package Manager (top left)
+2. **Select** "Add package from git URL"
+3. **Type**: `https://github.com/vis2k/Mirror.git?path=/Assets/Mirror`
+4. **Click** "Add"
+5. **Wait** for the installation to complete
 
-#### **Step 4a: Download Mirror**
+#### **Method B: Download and Import**
 1. **Go to**: https://mirror-networking.com/
 2. **Click** "Download Mirror"
 3. **Download** the latest version (usually a .unitypackage file)
-4. **Save** it to your Downloads folder
-
-#### **Step 4b: Import Mirror**
-1. **In Unity**, go to **Assets → Import Package → Custom Package**
-2. **Navigate** to your Downloads folder
-3. **Select** the Mirror .unitypackage file
-4. **Click** "Open"
-5. **In the Import window**:
-   - Make sure all items are checked
-   - Click **"Import"**
-6. **Wait** for the import to complete
+4. **In Unity**, go to **Assets → Import Package → Custom Package**
+5. **Select** the downloaded file and click **"Import"**
 
 ## ✅ **Verify Installation**
 
